@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import styled from 'styled-components';
+import QusestionCard from './components/QuestionCard';
+
+const MainWraper = styled.section`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const App = () => {
+  const StartTrivia = async () => {};
+  const CheckAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
+  const NextQuestion = () => {};
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainWraper>
+      <h1>React Quiz</h1>
+      <button className="start" onClick={StartTrivia}>
+        Start
+      </button>
+      <p className="score">Score:10</p>
+      <p>Loadin Questios</p>
+      <button className="next" onClick={NextQuestion}>
+        Next Question
+      </button>
+      <QusestionCard />
+    </MainWraper>
   );
-}
+};
 
 export default App;
