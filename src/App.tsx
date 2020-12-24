@@ -23,6 +23,7 @@ const App = () => {
   const [gameOver, setgameOver] = useState(true);
 
   console.log(fetchQuizQuestion(TOTAL_QUESTIONS, Difficulty.EASY));
+
   const StartTrivia = async () => {};
   const CheckAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
   const NextQuestion = () => {};
