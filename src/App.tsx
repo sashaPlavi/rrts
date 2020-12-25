@@ -18,14 +18,14 @@ type AnswerObject = {
   question: string;
   answer: string;
   correct: boolean;
-  corectAnswer: string;
+  correctAnswer: string;
 };
 
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QusetionState[]>([]);
   const [number, setNumber] = useState(0);
-  const [userAnswers, setUserAnswers] = useState([]);
+  const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
@@ -47,8 +47,31 @@ const App = () => {
     setLoading(false);
   };
 
-  const CheckAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
-  const NextQuestion = () => {};
+  const CheckAnswer = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    if (!gameOver) {
+      const answer = e.currentTarget.value;
+      const correct = questions[number].correct_answer === answer;
+      if (correct) {
+        setScore((prev) => prev + 1);
+      }
+      const answerObject = {
+        question: questions[number].question,
+        answer,
+        correct,
+        correctAnswer: questions[number].correct_answer,
+      };
+
+      setUserAnswers((prev) => [...prev, answerObject]);
+    }
+  };
+  const NextQuestion = () => {
+    const nextQuestion = number + 1;
+    if (nextQuestion === TOTAL_QUESTIONS) {
+      setGameOver(true);
+    } else {
+      setNumber(nextQuestion);
+    }
+  };
 
   return (
     <MainWraper>
