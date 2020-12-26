@@ -3,18 +3,14 @@ import React, { useState } from 'react';
 import { fetchQuizQuestion, Difficulty, QusetionState } from './API';
 //types
 
-import styled from 'styled-components';
+//style
+import { GlobalStyle } from './app.styles';
+//components
 import QusestionCard from './components/QuestionCard';
 
 const TOTAL_QUESTIONS = 10;
 
-const MainWraper = styled.section`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-type AnswerObject = {
+export type AnswerObject = {
   question: string;
   answer: string;
   correct: boolean;
@@ -74,14 +70,15 @@ const App = () => {
   };
 
   return (
-    <MainWraper>
+    <div>
+      <GlobalStyle />
       <h1>React Quiz</h1>
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
         <button className="start" onClick={startTrivia}>
           Start
         </button>
       ) : null}
-      {!gameOver ? <p className="score">Score:10</p> : null}
+      {!gameOver ? <p className="score">Score:{score}</p> : null}
       {loading ? <p>Loadin Questios</p> : null}
 
       {!loading && !gameOver && (
@@ -96,13 +93,13 @@ const App = () => {
       )}
       {!loading &&
       !gameOver &&
-      userAnswers.length == number + 1 &&
+      userAnswers.length === number + 1 &&
       number !== TOTAL_QUESTIONS - 1 ? (
         <button className="next" onClick={NextQuestion}>
           Next Question
         </button>
       ) : null}
-    </MainWraper>
+    </div>
   );
 };
 
